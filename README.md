@@ -1,4 +1,4 @@
-# CredSecure-App-With-SpringBoot
+# CredSecure
 CredSecure Application With SpringBoot: <br>
 <br>Please remember to change the Database username and password to your own. 
 Also remeber to set your email config to which ever vendor of your choosing as in this project,
