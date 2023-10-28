@@ -1,0 +1,312 @@
+@startuml
+left to right direction
+class tech.vedantchimote.controllers.AppController {
+- AccountRepository accountRepository
+- PaymentHistoryRepository paymentHistoryRepository
+- TransactHistoryRepository transactHistoryRepository
+~ User user
++ ModelAndView getDashboard(HttpSession)
++ ModelAndView getPaymentHistory(HttpSession)
++ ModelAndView getTransactHistory(HttpSession)
+}
+class tech.vedantchimote.helpers.GenAccountNumber {
++ {static} int generateAccountNumber()
+}
+class tech.vedantchimote.mailMessenger.MailMessenger {
++ {static} void htmlEmailMessenger(String,String,String,String)
+}
+class tech.vedantchimote.config.AppConfig {
+# void addResourceHandlers(ResourceHandlerRegistry)
++ InternalResourceViewResolver viewResolver()
+# void addInterceptors(InterceptorRegistry)
+}
+class tech.vedantchimote.interceptors.AppInterceptor {
++ boolean preHandle(HttpServletRequest,HttpServletResponse,Object)
++ void postHandle(HttpServletRequest,HttpServletResponse,Object,ModelAndView)
++ void afterCompletion(HttpServletRequest,HttpServletResponse,Object,Exception)
+}
+interface tech.vedantchimote.repository.PaymentRepository {
+~ void makePayment(int,String,String,double,String,String,String,LocalDateTime)
+}
+class tech.vedantchimote.controllers.RegisterController {
+- UserRepository userRepository
++ ModelAndView getRegister()
++ ModelAndView register(User,BindingResult,String,String,String,String,String)
+}
+class tech.vedantchimote.rest_controllers.RestAuthApiController {
+- UserRepository userRepository
++ ResponseEntity validateUserEmail(String)
+}
+interface tech.vedantchimote.repository.TransactHistoryRepository {
+~ List<TransactionHistory> getTransactionRecordsById(int)
+}
+class tech.vedantchimote.models.User {
+- int user_id
+- String first_name
+- String last_name
+- String email
+- String password
+- String token
+- String code
+- int verified
+- LocalDate verified_at
+- LocalDateTime created_at
+- LocalDateTime updated_at
++ int getUser_id()
++ void setUser_id(int)
++ String getFirst_name()
++ void setFirst_name(String)
++ String getLast_name()
++ void setLast_name(String)
++ String getEmail()
++ void setEmail(String)
++ String getPassword()
++ void setPassword(String)
++ String getToken()
++ void setToken(String)
++ String getCode()
++ void setCode(String)
++ int getVerified()
++ void setVerified(int)
++ LocalDate getVerified_at()
++ void setVerified_at(LocalDate)
++ LocalDateTime getCreated_at()
++ void setCreated_at(LocalDateTime)
++ LocalDateTime getUpdated_at()
++ void setUpdated_at(LocalDateTime)
+}
+class tech.vedantchimote.CredSecureApplication {
+# SpringApplicationBuilder configure(SpringApplicationBuilder)
++ {static} void main(String[])
+}
+class tech.vedantchimote.config.MailConfig {
++ {static} JavaMailSenderImpl getMailConfig()
+}
+class tech.vedantchimote.helpers.Token {
++ {static} String generateToken()
+}
+class tech.vedantchimote.models.Payment {
+- int payment_id
+- int account_id
+- String beneficiary
+- String beneficiary_acc_no
+- double amount
+- String reference_no
+- String status
+- String reason_code
+- LocalDateTime created_at
++ int getPayment_id()
++ void setPayment_id(int)
++ int getAccount_id()
++ void setAccount_id(int)
++ String getBeneficiary()
++ void setBeneficiary(String)
++ String getBeneficiary_acc_no()
++ void setBeneficiary_acc_no(String)
++ double getAmount()
++ void setAmount(double)
++ String getReference_no()
++ void setReference_no(String)
++ String getStatus()
++ void setStatus(String)
++ String getReason_code()
++ void setReason_code(String)
++ LocalDateTime getCreated_at()
++ void setCreated_at(LocalDateTime)
+}
+class MavenWrapperDownloader {
+- {static} String WRAPPER_VERSION
+- {static} String DEFAULT_DOWNLOAD_URL
+- {static} String MAVEN_WRAPPER_PROPERTIES_PATH
+- {static} String MAVEN_WRAPPER_JAR_PATH
+- {static} String PROPERTY_NAME_WRAPPER_URL
++ {static} void main(String[])
+- {static} void downloadFileFromURL(String,File)
+}
+interface tech.vedantchimote.repository.PaymentHistoryRepository {
+~ List<PaymentHistory> getPaymentRecordsById(int)
+}
+class tech.vedantchimote.CredSecureApplicationTests {
+~ void contextLoads()
+}
+interface tech.vedantchimote.repository.TransactRepository {
+~ void logTransaction(int,String,double,String,String,String,LocalDateTime)
+}
+class tech.vedantchimote.helpers.HTML {
++ {static} String htmlEmailTemplate(String,int)
+}
+class tech.vedantchimote.models.TransactionHistory {
+- int transaction_id
+- int account_id
+- int user_id
+- String transaction_type
+- double amount
+- String source
+- String status
+- String reason_code
+- LocalDateTime created_at
++ int getTransaction_id()
++ void setTransaction_id(int)
++ int getAccount_id()
++ void setAccount_id(int)
++ int getUser_id()
++ void setUser_id(int)
++ String getTransaction_type()
++ void setTransaction_type(String)
++ double getAmount()
++ void setAmount(double)
++ String getSource()
++ void setSource(String)
++ String getStatus()
++ void setStatus(String)
++ String getReason_code()
++ void setReason_code(String)
++ LocalDateTime getCreated_at()
++ void setCreated_at(LocalDateTime)
+}
+class tech.vedantchimote.models.PaymentHistory {
+- int payment_id
+- int account_id
+- int user_id
+- String beneficiary
+- String beneficiary_acc_no
+- double amount
+- String status
+- String reference_no
+- String reason_code
+- LocalDateTime created_at
++ int getPayment_id()
++ void setPayment_id(int)
++ int getAccount_id()
++ void setAccount_id(int)
++ int getUser_id()
++ void setUser_id(int)
++ String getBeneficiary()
++ void setBeneficiary(String)
++ String getBeneficiary_acc_no()
++ void setBeneficiary_acc_no(String)
++ double getAmount()
++ void setAmount(double)
++ String getStatus()
++ void setStatus(String)
++ String getReference_no()
++ void setReference_no(String)
++ String getReason_code()
++ void setReason_code(String)
++ LocalDateTime getCreated_at()
++ void setCreated_at(LocalDateTime)
+}
+interface tech.vedantchimote.repository.AccountRepository {
+~ List<Account> getUserAccountsById(int)
+~ BigDecimal getTotalBalance(int)
+~ double getAccountBalance(int,int)
+~ void changeAccountBalanceById(double,int)
+~ void createBankAccount(int,String,String,String)
+}
+class tech.vedantchimote.controler_advisor.AdvisorController {
++ User getUserDefaults()
+}
+class tech.vedantchimote.controllers.AuthController {
+- UserRepository userRepository
++ ModelAndView getLogin()
++ String login(String,String,String,Model,HttpSession)
++ String logout(HttpSession,RedirectAttributes)
+}
+class tech.vedantchimote.controllers.IndexController {
+- UserRepository userRepository
++ ModelAndView getIndex()
++ ModelAndView getError()
++ ModelAndView getVerify(String,String)
+}
+class tech.vedantchimote.controllers.TransactController {
+- AccountRepository accountRepository
+- PaymentRepository paymentRepository
+- TransactRepository transactRepository
+~ User user
+~ double currentBalance
+~ double newBalance
+~ LocalDateTime currentDateTime
++ String deposit(String,String,HttpSession,RedirectAttributes)
++ String transfer(String,String,String,HttpSession,RedirectAttributes)
++ String withdraw(String,String,HttpSession,RedirectAttributes)
++ String payment(String,String,String,String,String,HttpSession,RedirectAttributes)
+}
+interface tech.vedantchimote.repository.UserRepository {
+~ String getUserEmail(String)
+~ String getUserPassword(String)
+~ int isVerified(String)
+~ User getUserDetails(String)
+~ void registerUser(String,String,String,String,String,int)
+~ void verifyAccount(String,String)
+~ String checkToken(String)
+}
+class tech.vedantchimote.controllers.AccountController {
+- AccountRepository accountRepository
++ String createAccount(String,String,RedirectAttributes,HttpSession)
+}
+class tech.vedantchimote.rest_controllers.RestTransactApiController {
+}
+class tech.vedantchimote.models.Account {
+- int account_id
+- int user_id
+- String account_number
+- String account_name
+- String account_type
+- BigDecimal balance
+- LocalDateTime created_at
+- LocalDateTime updated_at
++ int getAccount_id()
++ void setAccount_id(int)
++ int getUser_id()
++ void setUser_id(int)
++ String getAccount_number()
++ void setAccount_number(String)
++ String getAccount_name()
++ void setAccount_name(String)
++ String getAccount_type()
++ void setAccount_type(String)
++ BigDecimal getBalance()
++ void setBalance(BigDecimal)
++ LocalDateTime getCreated_at()
++ void setCreated_at(LocalDateTime)
++ LocalDateTime getUpdated_at()
++ void setUpdated_at(LocalDateTime)
+}
+class tech.vedantchimote.models.Transact {
+- int transaction_id
+- int account_id
+- String transaction_type
+- double amount
+- String source
+- String status
+- String reason_code
+- LocalDateTime created_at
++ int getTransaction_id()
++ void setTransaction_id(int)
++ int getAccount_id()
++ void setAccount_id(int)
++ String getTransaction_type()
++ void setTransaction_type(String)
++ double getAmount()
++ void setAmount(double)
++ String getSource()
++ void setSource(String)
++ String getStatus()
++ void setStatus(String)
++ String getReason_code()
++ void setReason_code(String)
++ LocalDateTime getCreated_at()
++ void setCreated_at(LocalDateTime)
+}
+
+
+org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport <|-- tech.vedantchimote.config.AppConfig
+org.springframework.web.servlet.HandlerInterceptor <|.. tech.vedantchimote.interceptors.AppInterceptor
+org.springframework.data.repository.CrudRepository <|-- tech.vedantchimote.repository.PaymentRepository
+org.springframework.data.repository.CrudRepository <|-- tech.vedantchimote.repository.TransactHistoryRepository
+org.springframework.boot.web.servlet.support.SpringBootServletInitializer <|-- tech.vedantchimote.CredSecureApplication
+org.springframework.data.repository.CrudRepository <|-- tech.vedantchimote.repository.PaymentHistoryRepository
+org.springframework.data.repository.CrudRepository <|-- tech.vedantchimote.repository.TransactRepository
+org.springframework.data.repository.CrudRepository <|-- tech.vedantchimote.repository.AccountRepository
+org.springframework.data.repository.CrudRepository <|-- tech.vedantchimote.repository.UserRepository
+@enduml
